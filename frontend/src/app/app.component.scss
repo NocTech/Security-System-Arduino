@@ -1,0 +1,36 @@
+.container { margin: 20px; }
+.form-group { margin-bottom: 15px; }
+
+.log-container {
+    padding: 20px;
+  }
+  
+  .create-log-form, .edit-log-form {
+    margin-bottom: 20px;
+  }
+  
+  .create-log-form label, .edit-log-form label {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  .create-log-form input, .edit-log-form input {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+  }
+  
+  .logs-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .logs-list li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .logs-list button {
+    margin-left: 10px;
+  }

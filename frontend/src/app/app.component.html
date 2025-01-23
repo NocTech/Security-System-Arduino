@@ -1,0 +1,100 @@
+<div class="container">
+  <h1>User Management</h1>
+  
+  <!-- User List -->
+  <div>
+    <h2>Users</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>RFID</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.rfid }}</td>
+          <td>
+            <button (click)="editUser(user)" class="btn btn-warning">Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- User Form -->
+  <div>
+    <h2>{{ isEdit ? 'Edit User' : 'Create User' }}</h2>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Name</label><br>
+        <input id="name" formControlName="name" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label><br>
+        <input id="email" formControlName="email" class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label for="RFID">Rfid:</label><br>
+        <input id="rfid" formControlName="rfid" class="form-control" />
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">
+        {{ isEdit ? 'Update' : 'Create' }}
+      </button>
+    </form>
+  </div>
+</div>
+
+
+<div class="log-container">
+  <h2>Logs</h2>
+
+  <!-- Create Log Form -->
+  <div class="create-log-form">
+    <h3>Create New Log</h3>
+    <form (ngSubmit)="createLog()">
+      <label for="rfid">RFID:</label>
+      <input id="rfid" [(ngModel)]="newLog.rfid" name="rfid" required />
+      <label for="name">Name:</label>
+      <input id="name" [(ngModel)]="newLog.name" name="name" required />
+      <label for="message">Message:</label>
+      <input id="message" [(ngModel)]="newLog.message" name="message" required />
+      <button type="submit">Create Log</button>
+    </form>
+  </div>
+
+  <!-- Logs List -->
+  <div class="logs-list">
+    <h3>Existing Logs</h3>
+    <ul>
+      <li *ngFor="let log of logs">
+        <div>
+          <span>{{ log.timestamp }} - {{ log.name }} - {{log.message}} - ({{ log.rfid }})</span>
+          <button (click)="selectLog(log)">Edit</button>
+          <button (click)="deleteLog(log.id)">Delete</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Edit Selected Log -->
+  <div *ngIf="selectedLog" class="edit-log-form">
+    <h3>Edit Log</h3>
+    <form (ngSubmit)="updateLog()">
+      <label for="rfid">RFID:</label>
+      <input id="rfid" [(ngModel)]="selectedLog.rfid" name="rfid" required />
+      <label for="name">Name:</label>
+      <input id="name" [(ngModel)]="selectedLog.name" name="name" required />
+      <label for="message">Message:</label>
+      <input id="message" [(ngModel)]="selectedLog.message" name="message" required />
+      <button type="submit">Update Log</button>
+    </form>
+  </div>
+</div>
